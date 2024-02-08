@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punjabi Alphabet Matching Game</title>
+
+    <!-- Link to Tailwind CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
+    <!-- Custom CSS for styling -->
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+<div class="flex flex-col m-auto" x-data="window.amg.gameController()">
+    <!-- Large image container -->
+    <div class="w-full h-64 md:h-96 px-8 flex items-center justify-center mb-20">
+        <img x-show="alphabetImageSrc" :src="alphabetImageSrc" :alt="alphabet"
+             class="max-h-full max-w-full rounded-lg shadow">
+        <div x-show="!alphabetImageSrc"
+             class="text-6xl md:text-8xl bg-yellow-200 text-red-800 w-24 h-24 flex items-center justify-center font-bold">
+            <span x-text="alphabet"></span>
+        </div>
+    </div>
+
+    <!-- Alphabet options -->
+    <div class="">
+        <div class="grid grid-cols-4 gap-2 md:gap-8 mx-2" :key="selected.alphabet">
+            <template x-for="choice in choices" :key="choice">
+                <div class="game-card flex-shrink-0"
+                     :data-match-id="choice"
+                     @click="onChoice(choice);"
+                >
+
+                    <div class="w-19 m-w-19 h-24 text-6xl md:w-24 md:h-28 md:text-8xl flex items-center justify-center rounded-lg shadow font-bold"
+                         :class="{'bg-red-500 text-white': hasFlippedIncorrectly(choice), 'bg-green-500 text-white': hasFlippedCorrectly(choice), 'bg-yellow-200 text-red-800': hasNotFlipped(choice)}">
+                        <span x-show="hasNotFlipped(choice)" x-text="choice"></span>
+                        <span x-show="hasFlippedCorrectly(choice)">&#x2713;</span>
+                        <span x-show="hasFlippedIncorrectly(choice)">&#x2715;</span>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
+<footer class="p-5 text-center">
+    <div id="score">Score: 0</div>
+</footer>
+
+<script type="module">
+    import {gameController} from './scripts/controllers.js';
+
+    window.amg = {
+        gameController,
+    };
+</script>
+
+<!-- Custom JavaScript -->
+<script src="//unpkg.com/alpinejs" defer></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+</body>
+</html>
