@@ -1,4 +1,5 @@
 import alphabets, {getAlphabetImageSrc} from './alphabets.js';
+import {showCelebration} from './confetti.js';
 
 function pickFourRandomAlphabets(pastAlphabets) {
     const remaining = alphabets.filter(a => !pastAlphabets.includes(a));
@@ -42,16 +43,15 @@ export function gameController() {
             this.alphabet = alphabet;
             this.alphabetImageSrc = getAlphabetImageSrc(alphabet);
             this.choices = choices;
-
-            console.log('***nextSelection: ', this.alphabet, this.alphabetImageSrc, this.choices);
         },
         onChoice(alphabet) {
             this.flipped.push(alphabet);
             const correct = alphabet === this.alphabet;
             if (correct || this.flipped.length >= 4) {
+                showCelebration();
                 setTimeout(() => {
                     this.nextSelection();
-                }, 1000);
+                }, 2000);
             }
         },
         hasNotFlipped(alphabet) {
