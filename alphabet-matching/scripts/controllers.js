@@ -1,5 +1,6 @@
 import alphabets, {getAlphabetImageSrc} from './alphabets.js';
 import {showCelebration} from './confetti.js';
+import {vibrateCorrect, vibrateWrong} from './vibrate.js';
 
 function pickFourRandomAlphabets(pastAlphabets) {
     const remaining = alphabets.filter(a => !pastAlphabets.includes(a));
@@ -71,9 +72,12 @@ export function gameController() {
                     this.score += 10;
                 }
                 showCelebration();
+                vibrateCorrect();
                 setTimeout(() => {
                     this.nextSelection();
                 }, 2000);
+            } else {
+                vibrateWrong();
             }
             this.guessCount++;
         },

@@ -37,7 +37,7 @@ const allAlphabets = [
     },
     {
         alphabet: "ਙ",
-        images: ['flag']
+        images: []
     },
     {
         alphabet: "ਚ",
@@ -73,9 +73,8 @@ const allAlphabets = [
     },
     {
         alphabet: "ਢ",
-        images: ['camel']
-    }
-    ,
+        images: ['shield']
+    },
     {
         alphabet: "ਣ",
         images: []
@@ -141,7 +140,7 @@ const allAlphabets = [
     },
     {
         alphabet: "ੜ",
-        images: ['rooster']
+        images: []
     },
     {
         alphabet: "ਸ਼",
@@ -166,12 +165,11 @@ const allAlphabets = [
 ];
 
 const quizAlphabets = allAlphabets
-    .filter(a => a.images.length > 0)
     .map(a => a.alphabet);
 
 export function getAlphabetImageSrc(alphabet) {
     const result = allAlphabets.find(a => a.alphabet === alphabet);
-    return result ? `images/${result.images[0]}.webp` : '';
+    return result.images.length ? `images/${result.images[0]}.webp` : '';
 }
 
 export default quizAlphabets;
