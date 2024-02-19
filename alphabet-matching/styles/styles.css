@@ -1,0 +1,9 @@
+body {
+    background-color: #ffc319;
+}
+
+.alphabet-picture {
+    border: 10px solid #FFFFFF; /* White border to simulate a photo frame */
+    box-shadow: 5px 5px 2px 0 rgba(0,0,0,0.50); /* Shadow for a 3D effect */
+    transform: rotate(-5deg); /* Tilt the container */
+}

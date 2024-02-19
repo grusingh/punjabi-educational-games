@@ -17,9 +17,9 @@
 
 <div class="flex flex-col m-auto" x-data="window.amg.gameController()">
     <!-- Large image container -->
-    <div class="w-full h-64 md:h-96 px-8 flex items-center justify-center mb-20">
+    <div class="w-full h-64 md:h-96 px-8 flex items-center justify-center my-20">
         <img x-show="alphabetImageSrc" :src="alphabetImageSrc" :alt="alphabet"
-             class="max-h-full max-w-full rounded-lg shadow">
+             class="alphabet-picture max-h-full max-w-full rounded-lg shadow">
         <div x-show="!alphabetImageSrc"
              class="text-6xl md:text-8xl bg-yellow-200 text-red-800 w-24 h-24 flex items-center justify-center font-bold">
             <span x-text="alphabet"></span>
@@ -30,12 +30,12 @@
     <div class="">
         <div class="grid grid-cols-4 gap-2 md:gap-8 mx-2" :key="selected.alphabet">
             <template x-for="choice in choices" :key="choice">
-                <div class="game-card flex-shrink-0"
+                <div class="game-card flex-shrink-0 shadow-lg rounded-lg cursor-pointer"
                      :data-match-id="choice"
                      @click="onChoice(choice);"
                 >
 
-                    <div class="w-19 m-w-19 h-24 text-6xl md:w-24 md:h-28 md:text-8xl flex items-center justify-center rounded-lg shadow font-bold"
+                    <div class="w-19 m-w-19 h-24 text-6xl md:w-24 md:h-28 md:text-8xl flex items-center justify-center rounded-lg shadow font-bold  hover:bg-red-800 hover:text-yellow-200 transition duration-300 ease-in-out"
                          :class="{'bg-red-500 text-white': hasFlippedIncorrectly(choice), 'bg-green-500 text-white': hasFlippedCorrectly(choice), 'bg-yellow-200 text-red-800': hasNotFlipped(choice)}">
                         <span x-show="hasNotFlipped(choice)" x-text="choice"></span>
                         <span x-show="hasFlippedCorrectly(choice)">&#x2713;</span>
@@ -44,10 +44,17 @@
                 </div>
             </template>
         </div>
+        <div class="mt-12 flex justify-center align-center bg-transparent">
+            <div class="flex space-x-2">
+                <template x-for="(digit, index) in scoreDigits" :key="index">
+                    <div class="bg-red-800 text-white rounded-lg p-2 px-3 text-xl" x-text="digit"></div>
+                </template>
+            </div>
+        </div>
     </div>
+
 </div>
 <footer class="p-5 text-center">
-<!--    <div id="score">Score: 0</div>-->
 </footer>
 
 <script type="module">
@@ -58,7 +65,7 @@
         gameController,
     };
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         initConfetti();
     });
 
