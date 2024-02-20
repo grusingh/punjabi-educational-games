@@ -21,7 +21,7 @@ function playWrongChoiceAudio() {
 
 export function vibrateCorrect() {
     // Vibrate with a pattern: several short bursts to mimic the feeling of confetti
-    if (!window.navigator.vibrate) {
+    if ("vibrate" in window.navigator) {
         navigator.vibrate([100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]);
     }
     playCorrectChoiceAudio();
@@ -29,7 +29,7 @@ export function vibrateCorrect() {
 
 export function vibrateWrong() {
     // Vibrate with a single, longer burst to indicate a wrong choice
-    if (window.navigator.vibrate) {
+    if ("vibrate" in window.navigator) {
         navigator.vibrate(500);
     }
     playWrongChoiceAudio();
