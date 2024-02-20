@@ -10,9 +10,15 @@
 
     <!-- Custom CSS for styling -->
     <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- Credits
+        Dhol Beat: https://freesound.org/people/Johnnydhol/sounds/160426/
+        Soft Warning Buzzer: https://freesound.org/people/magnuswaker/sounds/641416/
+    -->
 </head>
 <body class="min-h-screen flex flex-col justify-between">
-
+<audio id="dhol-beat-audio" src="audio/dhol-beat.wav"></audio>
+<audio id="soft-warning-buzzer" src="audio/soft-warning-buzzer.wav"></audio>
 <div id="confetti" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999;"></div>
 
 <div class="flex flex-col m-auto" x-data="window.amg.gameController()">
@@ -35,7 +41,7 @@
                      @click="onChoice(choice);"
                 >
 
-                    <div class="w-19 m-w-19 h-24 text-6xl md:w-24 md:h-28 md:text-8xl flex items-center justify-center rounded-lg shadow font-bold  hover:bg-red-800 hover:text-yellow-200 transition duration-300 ease-in-out"
+                    <div class="w-19 m-w-19 h-24 text-6xl md:w-24 md:h-28 md:text-8xl flex items-center justify-center rounded-lg shadow font-bold md:hover:bg-red-800 md:hover:text-yellow-200 transition duration-300 ease-in-out"
                          :class="{'bg-red-500 text-white': hasFlippedIncorrectly(choice), 'bg-green-500 text-white': hasFlippedCorrectly(choice), 'bg-yellow-200 text-red-800': hasNotFlipped(choice)}">
                         <span x-show="hasNotFlipped(choice)" x-text="choice"></span>
                         <span x-show="hasFlippedCorrectly(choice)">&#x2713;</span>
@@ -44,7 +50,7 @@
                 </div>
             </template>
         </div>
-        <div class="mt-12 flex justify-center align-center bg-transparent">
+        <div class="mt-4 md:mt-12 flex justify-center align-center bg-transparent">
             <div class="flex space-x-2">
                 <template x-for="(digit, index) in scoreDigits" :key="index">
                     <div class="bg-red-800 text-white rounded-lg p-2 px-3 text-xl" x-text="digit"></div>
